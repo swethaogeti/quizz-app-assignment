@@ -1,8 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import questions from "../../../public/questions.json";
-type question = { question: string; answer: string; id: string };
-type Data = question[];
+type Question = {
+  question: string;
+  options: { id: number; text: string }[];
+  answer: number;
+  id: string;
+  image?: string
+};
 
+type Data = Question[];
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
