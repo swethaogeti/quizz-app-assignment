@@ -9,8 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node": "18.15.11",
-    "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
     "env-cmd": "^10.1.0",
     "eslint": "8.37.0",
@@ -26,6 +24,8 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
+    "@types/node": "^22.5.4",
+    "@types/react": "^18.3.5",
     "@types/react-gauge-chart": "^0.4.3",
     "@types/styled-components": "^5.1.26"
   }
