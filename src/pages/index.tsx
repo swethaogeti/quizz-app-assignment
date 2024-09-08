@@ -1,88 +1,94 @@
 "use client";
 
 import Head from "next/head";
-
+import Image from "next/image";
 import Link from "next/link";
-import React, { ReactElement, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import styled from "styled-components";
-import { dehydrate, QueryClient, useQuery } from "react-query";
-import type { DehydratedState } from "react-query";
-
-import { GetStaticProps } from "next";
-
-type Info = {
-  description: string;
-  rules: string[];
-};
+import { useQuery } from "react-query";
 
 type Question = {
-  id: string;
   question: string;
-  answer: string;
+  options: { id: number; text: string }[];
+  answer: number;
+  id: string;
 };
 
+type Data = Question;
+
 const MainContainer = styled.main`
-  max-width: 60rem;
-  padding: 1rem;
-  margin: auto;
-  height: 100vh;
-  position: relative;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-direction: column;
+padding: 40px 0;
+background: linear-gradient(180deg, rgba(175, 156, 243, 0) 7.92%, #AF9CF3 86.48%);
+background-blend-mode: multiply;
+height: 100%;
+
+.heading-container{
+  width: 340px;
+  height: 316px;
+  border-radius: 100%;
+  background-color: white;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  h1,
-  h2,
-  ul {
-    text-align: center;
-    color: #e7006c;
-  }
+  justify-content: center;
+  box-shadow: 0px 8px 8px 0px #0000001A;
 
-  p {
-    font-weight: 600;
-    color: gray;
-    padding: 1rem 0;
-    font-size: 1.1rem;
-  }
+  .heading{
+  color: #FF3B3C;
+  font-family: Poppins;
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 90px;
+  text-align: center;
 
-  li {
-    list-style: none;
-    color: gray;
-    padding: 0.1rem 0;
   }
-`;
+}
 
-const LinkButton = styled(Link)`
-  text-decoration: none;
+.link-btn{
+  width: 200px;
+  height: 55px;
+  background-color: #FF3B3C;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.image-icon{
+  width: 291px;
+  height: 70px;
+}
+@media (max-width: 480px) {
+  .heading-container {
+    width: 200px; 
+    height: 180px; 
+
+    .heading{
+    font-size: 26px;
+  }
+  } 
+}
 `;
 
-const fetchQuestions = async (): Promise<Question[]> => {
+
+const fetchQuestions = async (): Promise<Data[]> => {
   const res = await fetch(process.env.NEXT_PUBLIC_QUESTIONS_PATH as string);
   const data = await res.json();
 
   return data;
 };
 
-export default function Home({
-  dehydratedState,
-}: {
-  dehydratedState: DehydratedState;
-}) {
-  const { queries } = dehydratedState;
-  const [state] = queries;
-  const { state: stateData } = state;
-  const { data } = stateData as { data: Info };
-
-  const [qData, setQData] = useState([]);
-  const router = useRouter();
+export default function Home() {
 
   const {
     data: questionData,
-    error,
-    isError,
-    isLoading,
     isSuccess,
   } = useQuery<Question[], { message: string }>({
     queryKey: ["questionData"],
@@ -98,72 +104,28 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainContainer>
-        <h1>Quiz App</h1>
-        <div>
-          <p>{data.description}</p>
+        <div className="image-container">
+          <Image src='/upraisedIcon.png' alt="upraised image" className='image-icon' width={291} height={70} />
         </div>
 
-        <h2>Rules</h2>
-        <ul>
-          {data.rules.map((rule: string) => (
-            <li key={rule}>{rule}</li>
-          ))}
-        </ul>
+        <div className="heading-container">
+          <h1 className="heading">Quizz</h1>
+        </div>
+
         {isSuccess ? (
           <Link
-            style={{
-              textDecoration: "none",
-              color: "white",
-              backgroundColor: "#E4006C",
-              textAlign: "center",
-              padding: "0.5rem",
-              borderRadius: "4px",
-              fontWeight: "bold",
-              margin: "1rem",
-            }}
             href="/questions/[question]"
             as={`/questions/${questionData[0]?.id}`}
+            className="link-btn"
           >
-            Start the quiz
+            Start
           </Link>
         ) : (
           ""
         )}
+
       </MainContainer>
     </>
   );
 }
 
-// export const getStaticProps = async () => {
-//   const res = await fetch(process.env.ORIGIN + "/api/hello");
-//   const data = await res.json();
-
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
-
-const getInfo = async (): Promise<Info> => {
-  if (!process.env.ORIGIN) throw new Error("base url not found");
-
-  const res = await fetch(process.env.INFO_PATH as string);
-
-  const data = await res.json();
-
-  return data;
-};
-
-export const getStaticProps: GetStaticProps = async (context) => {
-  // ...
-
-  const queryClient = new QueryClient();
-  await queryClient.fetchQuery(["info"], () => getInfo());
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-};

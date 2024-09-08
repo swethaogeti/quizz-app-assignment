@@ -1,33 +1,74 @@
+
 [
   {
-    "question": "What are two things you can never eat for breakfast?",
-    "answer": "Lunch and Dinner",
+    "question": "What is the main responsibility of a Product Manager?",
+   
+    "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw8zwFJxkyvDXn338ayJYhpdXmzNtxttfpMYaKYxxM9smIPv1k",
+    "options": [
+      { "id": 0, "text": "Managing the engineering team" },
+      { "id": 1, "text": "Defining the product vision and strategy" },
+      { "id": 2, "text": "Writing marketing copy" },
+      { "id": 3, "text": "Conducting performance reviews" }
+    ],
+    "answer": 1,
     "id": "1"
   },
+ 
   {
-    "question": "What is always coming but never arrives?",
-    "answer": "Tomorrow",
+    "question": "What does MVP stand for in product management?",
+    "options": [
+      { "id": 0, "text": "Most Valuable Product" },
+      { "id": 1, "text": "Minimum Viable Product" },
+      { "id": 2, "text": "Maximum Viable Product" },
+      { "id": 3, "text": "Model Value Proposition" }
+    ],
+    "answer": 1,
     "id": "2"
   },
+ 
   {
-    "question": "What can one catch that is not thrown?",
-    "answer": "cold",
+    "question": "A/B testing is primarily used to:",
+    "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFKytVdOFHVsd0bSMlmELtz7BAgWPWybZjRQ&s",
+    "options": [
+      { "id": 0, "text": "Develop new product features" },
+      { "id": 1, "text": "Analyze customer feedback" },
+      { "id": 2, "text": "Compare two versions of a feature to determine which performs better" },
+      { "id": 3, "text": "Manage project timelines" }
+    ],
+    "answer": 2,
     "id": "3"
   },
-
   {
-    "question": "A girl fell off a 50-foot ladder but didn’t get hurt. How come?",
-    "answer": "She fell off the bottom step",
+    "question": "In Agile methodology, what is a 'sprint'?",
+    "options": [
+      { "id": 0, "text": "A time-boxed period during which a specific set of work is completed" },
+      { "id": 1, "text": "A brainstorming session with stakeholders" },
+      { "id": 2, "text": "A way to prioritize features" },
+      { "id": 3, "text": "A final product launch" }
+    ],
+    "answer": 0,
     "id": "4"
   },
   {
-    "question": " What starts with “e” and ends with “e” but only has one letter in it?",
-    "answer": "An envelope",
+    "question": "What is a 'user persona' in product management?",
+    "options": [
+      { "id": 0, "text": "A fictional representation of a customer based on market research" },
+      { "id": 1, "text": "A team member who handles customer complaints" },
+      { "id": 2, "text": "A unique product feature" },
+      { "id": 3, "text": "A competitor analysis tool" }
+    ],
+    "answer": 0,
     "id": "5"
   },
   {
-    "question": "Some months have 31 days, others have 30 days, but how many have 28 days?",
-    "answer": "All 12",
+    "question": "Which phase comes first in the product development lifecycle?",
+    "options": [
+      { "id": 0, "text": "Market research" },
+      { "id": 1, "text": "Product launch" },
+      { "id": 2, "text": "Product testing" },
+      { "id": 3, "text": "Feature development" }
+    ],
+    "answer": 0,
     "id": "6"
   }
 ]
